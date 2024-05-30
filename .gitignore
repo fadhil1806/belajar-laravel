@@ -1,0 +1,9 @@
+/bootstrap
+/storage
+/vendor
+.env.backup
+.package-lock.json
+/node_modules
+/.fleet
+/.idea
+/.vscode
