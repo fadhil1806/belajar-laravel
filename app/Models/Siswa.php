@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\KelasSiswa;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Siswa extends Model
 {
@@ -11,7 +12,8 @@ class Siswa extends Model
     protected $table = 'siswa';
     protected $fillable = ['nama_siswa', 'kelas_siswa', 'domisli_siswa', 'nama_file_pdf'];
 
-    public function siswa() {
+    public function kelas()
+    {
         return $this->belongsTo(KelasSiswa::class);
     }
 }

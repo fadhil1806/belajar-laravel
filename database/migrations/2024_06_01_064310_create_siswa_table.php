@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
             $table->string('nama_siswa');
-            $table->unsignedBigInteger('kelas_siswa');
-            $table->foreign('kelas_siswa')->references('id')->on('kelas_siswa');
+            $table->unsignedBigInteger('kelas');
+            $table->foreign('kelas')->references('id')->on('kelas_siswa');
             $table->string('domisli_siswa');
             $table->string('nama_file_pdf')->unique();
             $table->timestamps();
