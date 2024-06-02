@@ -5,7 +5,6 @@
             {{ __('Kategori') }}
         </h2>
     </x-slot>
-
     <button class="btn btn-primary"><a href="{{route('kategori.add')}}" class="text-white">Add Kategori</a></button>
     <div class="py-">
         <table class="table card-table table-vcenter text-nowrap datatable">
@@ -21,7 +20,7 @@
                     $i = 1;
                 @endphp
                 @forelse ($kategori as $item)
-                       
+
               <tr>
                 <td><span class="text-secondary">{{$i++}}</span></td>
                 <td>{{$item->nama_kategori}}</td>
@@ -40,7 +39,7 @@
                       </a>
                     </div>
                 </td>
- 
+
               </tr>
               @empty
               <tr>
@@ -52,5 +51,21 @@
             </tbody>
           </table>
     </div>
+        @session('success')
+        <div class="alert alert-important alert-success alert-dismissible" role="alert" style="position: fixed; bottom: 0; right: 0">
+            <div class="d-flex">
+              <div>
+                <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
+              </div>
+              <div>
+                {{  session('success') }}
+              </div>
+            </div>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+          </div>
+        @endsession
 </x-app-layout>
+
+
 
