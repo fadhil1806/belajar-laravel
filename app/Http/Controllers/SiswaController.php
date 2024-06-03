@@ -6,12 +6,12 @@ use Illuminate\Support\Str; // Import Str class for file naming
 use App\Models\Siswa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File; // Import File class for file operations
+use Illuminate\Support\Facades\File;
 
 class SiswaController extends Controller
 {
     public function index() {
-        $siswa = Siswa::all();
+        $siswa = Siswa::with('kelasGet')->get();
         $kelas_siswa = KelasSiswa::all();
         return view('admin.siswa.index', compact('siswa', 'kelas_siswa'));
     }
@@ -31,7 +31,7 @@ class SiswaController extends Controller
 
         $siswa = Siswa::create([
             'nama_siswa'=>$request->nama_siswa,
-            'kelas_siswa'=>$request->kelas_siswa,
+            'kelas'=>$request->kelas_siswa,
             'domisli_siswa'=>$request->domisli_siswa,
             'nama_file_pdf'=>Str::slug($request->nama_siswa) . '.pdf'
         ]);
@@ -65,7 +65,7 @@ class SiswaController extends Controller
 
         Siswa::findOrFail($id)->update([
             'nama_siswa' => $request->nama_siswa,
-            'kelas_siswa' => $request->kelas_siswa,
+            'kelas' => $request->kelas_siswa,
             'domisli_siswa' => $request->domisli_siswa
         ]);
 

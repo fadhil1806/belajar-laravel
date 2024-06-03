@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Kelas') }}
         </h2>
     </x-slot>
     @include('inc.form')
@@ -13,35 +13,25 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Kelas</th>
-                            <th>Domisli</th>
                             <th class="w-1"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($siswa as $data)
+                        @forelse ($kelas_siswa as $data)
                             <tr>
                                 <td data-label="Nama">
                                     <div class="d-flex py-1 align-items-center">
                                         <div class="flex-fill">
-                                            <div class="font-weight-medium">{{ $data->nama_siswa }}</div>
+                                            <div class="font-weight-medium">{{ $data->nama }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td data-label="Kelas">
-                                    <div class="text-secondary">{{ $data->kelasGet->nama }}</div>
-                                </td>
-                                <td class="text-secondary" data-label="Alamat">
-                                    {{ $data->domisli_siswa }}
-                                </td>
                                 <td>
                                     <div class="btn-list flex-nowrap">
-                                        <a class="btn" href="{{ asset('files/siswa/' . $data->nama_file_pdf) }}"
-                                            download>Export</a>
-                                        <a class="btn" href="{{ route('siswa.update', $data->id) }}">
+                                        <a class="btn" href="{{ route('kelas.update', $data->id) }}">
                                             Edit
                                         </a>
-                                        <form action="{{ route('siswa.delete', $data->id) }}" method="POST">
+                                        <form action="{{ route('kelas.delete', $data->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button id="btn-delete" class="btn" onclick="openAlertDelete()">
@@ -73,37 +63,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         onclick="closeModalAddSiswa()"></button>
                 </div>
-                <form class="card mt-4" action="{{ route('siswa.store') }}" method="POST">
+                <form class="card mt-4" action="{{ route('kelas.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" placeholder="Enter name" name="nama_siswa"
-                                value="{{ old('nama_siswa') }}">
-                            @error('nama_siswa')
+                            <input type="text" class="form-control" placeholder="Enter name" name="nama"
+                                value="{{ old('nama') }}">
+                            @error('nama')
                                 <div class="text-danger mt-2">{{ $message }}</div>
                             @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Kelas</label>
-                            <div class="col">
-                                <select class="form-select" name="kelas_siswa">
-                                    @forelse ($kelas_siswa as $itemk)
-                                        <option value="{{ $itemk->id }}">{{ $itemk->nama }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
-                                @error('kelas_siswa')
-                                    <div class="text-danger mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label class="col-3 col-form-label required">Domisli</label>
-                                <textarea type="text" class="form-control" placeholder="Enter your alamat" rows="4" name="domisli_siswa"></textarea>
-                                @error('domisli_siswa')
-                                    <div class="text-danger mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

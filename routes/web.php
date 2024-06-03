@@ -3,6 +3,7 @@
 // use App\Http\Controllers\;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 
 Route::get('/', function () {
@@ -35,6 +36,17 @@ Route::middleware([
         Route::put('/siswa/edit/{id}', 'edit')->name('siswa.edit');
         Route::delete('/siswa/delete/{id}', 'destroy')->name('siswa.delete');
     });
+
+
+    Route::controller(KelasController::class)->group(function() {
+        Route::get('/kelas', 'index')->name('kelas');
+        Route::get('/kelas/add', 'create')->name('kelas.add');
+        Route::post('/kelas/create', 'store')->name('kelas.store');
+        Route::get('/kelas/update/{id}', 'update')->name('kelas.update');
+        Route::put('/kelas/edit/{id}', 'edit')->name('kelas.edit');
+        Route::delete('/kelas/delete/{id}', 'destroy')->name('kelas.delete');
+    });
+
 
 
 });

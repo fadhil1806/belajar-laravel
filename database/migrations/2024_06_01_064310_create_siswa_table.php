@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_siswa');
             $table->unsignedBigInteger('kelas');
-            $table->foreign('kelas')->references('id')->on('kelas_siswa');
+            $table->foreign('kelas')->references('id')->on('kelas_siswa')->cascadeOnDelete();
             $table->string('domisli_siswa');
             $table->string('nama_file_pdf')->unique();
             $table->timestamps();

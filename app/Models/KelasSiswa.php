@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Models;
 
-use App\Models\Siswa;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class KelasSiswa extends Model
 {
@@ -13,8 +11,8 @@ class KelasSiswa extends Model
     protected $table = 'kelas_siswa';
     protected $fillable = ['nama'];
 
-    public function siswa()
+    public function siswaGet()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->hasMany(Siswa::class, 'kelas');
     }
 }
