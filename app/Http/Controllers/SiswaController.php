@@ -63,11 +63,28 @@ class SiswaController extends Controller
             'domisli_siswa.required' => 'Domisli is required'
         ]);
 
-        Siswa::findOrFail($id)->update([
+        $data = Siswa::findOrFail($id);
+
+        $filePath = public_path('files/siswa/') .$data->nama_file_pdf;
+
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+        }
+
+        $filePath = public_path('files/siswa/' . Str::slug($request->nama_siswa) . '.pdf');
+
+
+
+        $siswa = $data->update([
             'nama_siswa' => $request->nama_siswa,
             'kelas' => $request->kelas_siswa,
-            'domisli_siswa' => $request->domisli_siswa
+            'domisli_siswa' => $request->domisli_siswa,
+            'nama_file_pdf' => Str::slug($request->nama_siswa) . '.pdf'
         ]);
+
+        $pdf = Pdf::loadView('admin.siswa.template', compact('siswa'));
+
+        $pdf->save($filePath);
 
 
 
@@ -76,7 +93,7 @@ class SiswaController extends Controller
 
     public function destroy($id) {
         $data = Siswa::findOrFail($id);
-        $filePath = $data->nama_file_pdf;
+        $filePath = public_path('files/siswa/') .$data->nama_file_pdf;
 
         if (File::exists($filePath)) {
             File::delete($filePath);
