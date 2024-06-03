@@ -13,7 +13,7 @@
                 <div class="mb-3 row">
                     <label class="col-3 col-form-label required">Nama Siswa</label>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Enter name" name="nama"
+                        <input type="text" class="form-control" placeholder="Enter nam" name="nama"
                             value="{{ $kelas_siswa->nama }}">
                         @error('nama_siswa')
                             <div class="text-danger mt-2">{{ $message }}</div>
